@@ -1,0 +1,586 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="papers">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
+    <root id="1"/>
+    <schema id="2" parent="1" name="papers">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="information_schema"/>
+    <table id="4" parent="2" name="Destino"/>
+    <table id="5" parent="2" name="Documento"/>
+    <table id="6" parent="2" name="DocumentosPessoas"/>
+    <table id="7" parent="2" name="DocumentosPessoasFavoritos"/>
+    <table id="8" parent="2" name="FilaSubmissao"/>
+    <table id="9" parent="2" name="HistoricoFilaSubmissao"/>
+    <table id="10" parent="2" name="Notificacao"/>
+    <table id="11" parent="2" name="Pessoa"/>
+    <table id="12" parent="2" name="PessoaFoto"/>
+    <table id="13" parent="2" name="TipoDocumento"/>
+    <table id="14" parent="2" name="Usuario"/>
+    <column id="15" parent="4" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="16" parent="4" name="descricao">
+      <Position>2</Position>
+      <DataType>varchar(100)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="17" parent="4" name="classificacao">
+      <Position>3</Position>
+      <DataType>varchar(5)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="18" parent="4" name="Destino_classifacao">
+      <ColNames>classificacao</ColNames>
+    </index>
+    <index id="19" parent="4" name="Destino_Descricao">
+      <ColNames>descricao</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="20" parent="4" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="21" parent="4" name="Destino_Descricao">
+      <ColNames>descricao</ColNames>
+      <UnderlyingIndexName>Destino_Descricao</UnderlyingIndexName>
+    </key>
+    <column id="22" parent="5" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="23" parent="5" name="titulo">
+      <Position>2</Position>
+      <DataType>varchar(250)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="24" parent="5" name="resumo">
+      <Position>3</Position>
+      <DataType>varchar(600)|0</DataType>
+    </column>
+    <column id="25" parent="5" name="palavrasChave">
+      <Position>4</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="26" parent="5" name="tipoDocumento">
+      <Position>5</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="27" parent="5" name="criadoPor">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="28" parent="5" name="Documento_CriadoPor">
+      <ColNames>criadoPor</ColNames>
+    </index>
+    <index id="29" parent="5" name="Documento_PalavraChave">
+      <ColNames>palavrasChave</ColNames>
+    </index>
+    <index id="30" parent="5" name="Documento_TipoDocumento">
+      <ColNames>tipoDocumento</ColNames>
+    </index>
+    <index id="31" parent="5" name="Documento_Titulo">
+      <ColNames>titulo</ColNames>
+    </index>
+    <key id="32" parent="5" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="33" parent="5" name="Documento_TipoDocumento">
+      <ColNames>tipoDocumento</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>TipoDocumento</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="34" parent="5" name="Documento_Pessoa">
+      <ColNames>criadoPor</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="35" parent="6" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="36" parent="6" name="id_pessoa">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="37" parent="6" name="id_documento">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="38" parent="6" name="DocumentoPessoas_Documento">
+      <ColNames>id_documento</ColNames>
+    </index>
+    <index id="39" parent="6" name="DocumentosPessoas_Documento_Pessoa">
+      <ColNames>id_pessoa
+id_documento</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="40" parent="6" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="41" parent="6" name="DocumentosPessoas_Documento_Pessoa">
+      <ColNames>id_pessoa
+id_documento</ColNames>
+      <UnderlyingIndexName>DocumentosPessoas_Documento_Pessoa</UnderlyingIndexName>
+    </key>
+    <foreign-key id="42" parent="6" name="DocumentoPessoas_Autor">
+      <ColNames>id_pessoa</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="43" parent="6" name="DocumentoPessoas_Documento">
+      <ColNames>id_documento</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Documento</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="44" parent="7" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="45" parent="7" name="id_documento">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="46" parent="7" name="id_pessoa">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="47" parent="7" name="DocumentosPessoasFavoritos_Documento">
+      <ColNames>id_documento</ColNames>
+    </index>
+    <index id="48" parent="7" name="DocumentosPessoasFavoritos_Pessoa">
+      <ColNames>id_pessoa</ColNames>
+    </index>
+    <key id="49" parent="7" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="50" parent="7" name="DocumentosPessoasFavoritos_Documento">
+      <ColNames>id_documento</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Documento</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="51" parent="7" name="DocumentosPessoasFavoritos_Pessoa">
+      <ColNames>id_pessoa</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="52" parent="8" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="53" parent="8" name="situacao">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="54" parent="8" name="id_documento">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="55" parent="8" name="versao">
+      <Position>4</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="56" parent="8" name="dtLimiteSubmissao">
+      <Position>5</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="57" parent="8" name="destino">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="58" parent="8" name="idioma">
+      <Position>7</Position>
+      <DataType>varchar(100)|0</DataType>
+    </column>
+    <column id="59" parent="8" name="observacao">
+      <Position>8</Position>
+      <DataType>varchar(250)|0</DataType>
+    </column>
+    <column id="60" parent="8" name="dtPublicacao">
+      <Position>9</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="61" parent="8" name="dtUltAtualizacao">
+      <Position>10</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="62" parent="8" name="horaUltAtualizacao">
+      <Position>11</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="63" parent="8" name="criadoPor">
+      <Position>12</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="64" parent="8" name="FilaSubmissao_CriadoPor">
+      <ColNames>criadoPor</ColNames>
+    </index>
+    <index id="65" parent="8" name="FilaSubmissao_Destino">
+      <ColNames>destino</ColNames>
+    </index>
+    <index id="66" parent="8" name="FilaSubmissao_Documento">
+      <ColNames>id_documento</ColNames>
+    </index>
+    <index id="67" parent="8" name="FilaSubmissao_DtLimite">
+      <ColNames>dtLimiteSubmissao</ColNames>
+    </index>
+    <index id="68" parent="8" name="FilaSubmissao_DtPublicacao">
+      <ColNames>dtPublicacao</ColNames>
+    </index>
+    <index id="69" parent="8" name="FilaSubmissao_Situacao">
+      <ColNames>situacao</ColNames>
+    </index>
+    <key id="70" parent="8" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="71" parent="8" name="FilaSubmissao_Documento">
+      <ColNames>id_documento</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Documento</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="72" parent="8" name="FilaSubmissao_Destino">
+      <ColNames>destino</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Destino</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="73" parent="8" name="FilaSubmissao_Pessoa">
+      <ColNames>criadoPor</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="74" parent="9" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="75" parent="9" name="id_filaSubmissao">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="76" parent="9" name="situacao">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="77" parent="9" name="versao">
+      <Position>4</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="78" parent="9" name="dtAtualizacao">
+      <Position>5</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="79" parent="9" name="horaAtualizacao">
+      <Position>6</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="80" parent="9" name="comentario">
+      <Position>7</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="81" parent="9" name="criadoPor">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="82" parent="9" name="HistoricoFilaSubmissao_DtHrAtualizao">
+      <ColNames>dtAtualizacao
+horaAtualizacao</ColNames>
+    </index>
+    <index id="83" parent="9" name="HistoricoFilaSubmissao_FilaSubmissao">
+      <ColNames>id_filaSubmissao</ColNames>
+    </index>
+    <index id="84" parent="9" name="HistoricoFilaSubmissao_Pessoa">
+      <ColNames>criadoPor</ColNames>
+    </index>
+    <key id="85" parent="9" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="86" parent="9" name="HistoricoFilaSubmissao_FilaSubmissao">
+      <ColNames>id_filaSubmissao</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>FilaSubmissao</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="87" parent="9" name="HistoricoFilaSubmissao_Pessoa">
+      <ColNames>criadoPor</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="88" parent="10" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="89" parent="10" name="dtCriacao">
+      <Position>2</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="90" parent="10" name="horaCriacao">
+      <Position>3</Position>
+      <DataType>varchar(10)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="91" parent="10" name="status">
+      <Position>4</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="92" parent="10" name="conteudo">
+      <Position>5</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="93" parent="10" name="documento">
+      <Position>6</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="94" parent="10" name="destinatario">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="95" parent="10" name="Notificacao_Documento">
+      <ColNames>documento</ColNames>
+    </index>
+    <index id="96" parent="10" name="Notificacao_Pessoa">
+      <ColNames>destinatario</ColNames>
+    </index>
+    <key id="97" parent="10" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="98" parent="10" name="Notificacao_Documento">
+      <ColNames>documento</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Documento</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="99" parent="10" name="Notificacao_Pessoa">
+      <ColNames>destinatario</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="100" parent="11" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="101" parent="11" name="primeiroNome">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="102" parent="11" name="segundoNome">
+      <Position>3</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="103" parent="11" name="ddd">
+      <Position>4</Position>
+      <DataType>varchar(3)|0</DataType>
+    </column>
+    <column id="104" parent="11" name="foneCelular">
+      <Position>5</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="105" parent="11" name="email">
+      <Position>6</Position>
+      <DataType>varchar(200)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="106" parent="11" name="biografia">
+      <Position>7</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="107" parent="11" name="instituicao">
+      <Position>8</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="108" parent="11" name="pais">
+      <Position>9</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="109" parent="11" name="estado">
+      <Position>10</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="110" parent="11" name="cidade">
+      <Position>11</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="111" parent="11" name="foto">
+      <Position>12</Position>
+      <DataType>mediumblob|0</DataType>
+    </column>
+    <index id="112" parent="11" name="Pessoa_Email">
+      <ColNames>email</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <index id="113" parent="11" name="Pessoa_PrimeiroNome">
+      <ColNames>primeiroNome</ColNames>
+    </index>
+    <index id="114" parent="11" name="Pessoa_SegundoNome">
+      <ColNames>segundoNome</ColNames>
+    </index>
+    <key id="115" parent="11" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="116" parent="11" name="Pessoa_Email">
+      <ColNames>email</ColNames>
+      <UnderlyingIndexName>Pessoa_Email</UnderlyingIndexName>
+    </key>
+    <column id="117" parent="12" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="118" parent="12" name="pessoa_id">
+      <Position>2</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="119" parent="12" name="foto">
+      <Position>3</Position>
+      <DataType>longblob|0</DataType>
+    </column>
+    <index id="120" parent="12" name="PessoFoto_Pessoa">
+      <ColNames>pessoa_id</ColNames>
+    </index>
+    <key id="121" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="122" parent="12" name="PessoFoto_Pessoa">
+      <ColNames>pessoa_id</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+    <column id="123" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="124" parent="13" name="descricao">
+      <Position>2</Position>
+      <DataType>varchar(50)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <key id="125" parent="13" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <column id="126" parent="14" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="127" parent="14" name="senha">
+      <Position>2</Position>
+      <DataType>varchar(30)|0</DataType>
+    </column>
+    <column id="128" parent="14" name="token">
+      <Position>3</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <column id="129" parent="14" name="bloqueado">
+      <Position>4</Position>
+      <DataType>tinyint(1)|0</DataType>
+      <DefaultExpression>&apos;1&apos;</DefaultExpression>
+    </column>
+    <column id="130" parent="14" name="dtDesbloqueio">
+      <Position>5</Position>
+      <DataType>varchar(10)|0</DataType>
+    </column>
+    <column id="131" parent="14" name="dtUltAcesso">
+      <Position>6</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="132" parent="14" name="id_pessoa">
+      <Position>7</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="133" parent="14" name="Usuario_Pessoa">
+      <ColNames>id_pessoa</ColNames>
+    </index>
+    <key id="134" parent="14" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="135" parent="14" name="Usuario_Pessoa">
+      <ColNames>id_pessoa</ColNames>
+      <RefSchemaName>papers</RefSchemaName>
+      <RefTableName>Pessoa</RefTableName>
+      <RefColNames>id</RefColNames>
+      <OnDelete>cascade</OnDelete>
+    </foreign-key>
+  </database-model>
+</dataSource>
