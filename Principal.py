@@ -1,15 +1,18 @@
+from random import randint
+import time
+
 from model.Fabrica import Fabrica
+from model.Maquina import Maquina
+from model.Setup import Setup
 
 if __name__ == '__main__':
-    x=6
-    fabricas = []
+    setup = Setup("Produto A", 10, 10)
+    fabrica = Fabrica(1, "Fabrica %i" % 1, setup)
 
-    for i in range(1, x):
-        fabrica = Fabrica()
-        fabrica.setId(i)
-        fabrica.setDescricao("Fabrica %i" %(i))
-        print(fabrica.getDescricao())
-        fabricas.append(fabrica)
+    maquinas = []
+    for i in range(setup.getQtdeMaquinas()):
+        maquina = Maquina(i, "Maquina %i" % i, fabrica)
+        maquinas.append(maquina)
 
-    print(fabricas[3].getDescricao())
-
+    for maq in maquinas:
+        maq.start()
